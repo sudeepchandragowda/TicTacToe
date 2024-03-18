@@ -20,9 +20,9 @@ public class Player {
         System.out.println("Please enter the row for them");
         int row = scanner.nextInt();
         System.out.println("Please enter the row for them");
-        int col = scanner.nextInt();
-        //validate the move and throw exception or msg
-
+        int column = scanner.nextInt();
+        //TODO : validate the move and throw exception or msg
+        return new Move(new Cell(row, column, this), this);
     }
     public Long getId() {
         return id;

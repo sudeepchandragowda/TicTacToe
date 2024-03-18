@@ -6,11 +6,17 @@ public class Cell {
     private CellState cellState;
     private Player player;
 
-    public Cell(int row, int column, CellState cellState, Player player) {
+    public Cell(int row, int column) {
         this.row = row;
         this.column = column;
-        this.cellState = cellState;
+        this.cellState = CellState.EMPTY;
+    }
+
+    public Cell(int row, int column, Player player) {
+        this.row = row;
+        this.column = column;
         this.player = player;
+        this.cellState = CellState.FILLED;
     }
     public void display() {
         if(player == null) {
@@ -18,7 +24,7 @@ public class Cell {
         } else if (cellState.equals(CellState.BLOCKED)) {
             System.out.println("||||");
         } else {
-                System.out.println("|" + player.getSymbol() + "|");
+                System.out.println("|" + player.getSymbol().getSymbolChar() + "|");
             }
         }
 

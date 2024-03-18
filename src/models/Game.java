@@ -85,7 +85,7 @@ public class Game {
         private void validateUniqueSymbolForAllPlayers() {
             HashSet<Character> set = new HashSet<>();
             for (Player player : players) {
-                set.add(player.getSymbol());
+                set.add(player.getSymbol().getSymbolChar());
             }
             if (set.size() != players.size()) {
                 throw new DuplicateSymbolException("Every player should have unique symbol");
