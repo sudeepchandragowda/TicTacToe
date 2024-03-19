@@ -4,6 +4,7 @@ import exception.DuplicateSymbolException;
 import exception.InvalidBotCountException;
 import exception.InvalidDimensionException;
 import exception.InvalidNumberOfPlayersException;
+import strategies.winningStrategy.WinningStrategy;
 
 import javax.swing.text.StyledEditorKit;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Game {
         this.winningStrategies = winningStrategies;
     }
 
-    public static class Builder() {
+    public static class Builder {
         private List<Player> players;
         private List<WinningStrategy> winningStrategies;
         private int dimension;
