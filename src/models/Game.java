@@ -28,6 +28,35 @@ public class Game {
         this.nextplayerIndex = 0;
         this.winningStrategies = winningStrategies;
     }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public int getNextplayerIndex() {
+        return nextplayerIndex;
+    }
+
+    public List<WinningStrategy> getWinningStrategies() {
+        return winningStrategies;
+    }
+
     public static Builder builder() {
         return new Builder();
     }

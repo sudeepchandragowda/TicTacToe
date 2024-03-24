@@ -19,5 +19,19 @@ public class GameController {
         }
         return null;
     }
+    public void displayBoard (Game game) {
+        game.getBoard().printBoard();
+    }
+    public GameState getGameState(Game game){
+        return game.getGameState();
+    }
+    public void executeMove(Game game) {
+        int nextPlayerIndex = game.getNextplayerIndex();
+        Player nextPlayerToPlay = game.getPlayers().get(nextPlayerIndex);
+        nextPlayerToPlay.makeMove(game.getBoard());
+    }
+    public String getWinner(Game game) {
+        return game.getWinner().getName();
+    }
 }
 
