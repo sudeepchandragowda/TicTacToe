@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OrderOneWinningStrategy implements WinningStrategy {
+    private int dimension;
     private List<HashMap<Character,Integer>> rowSymbolCount = new ArrayList<>();
     private List<HashMap<Character,Integer>> columnSymbolCount = new ArrayList<>();
     private HashMap<Character, Integer> topLeftDiagonalSymbolCount  = new HashMap<>();
@@ -16,10 +17,26 @@ public class OrderOneWinningStrategy implements WinningStrategy {
     private HashMap<Character, Integer> cornerSymbolCount = new HashMap<>();
 
     public OrderOneWinningStrategy(int dimension) {
+        this.dimension = dimension;
         for (int i=0; i<dimension; i++) {
             rowSymbolCount.add(new HashMap<>());
             columnSymbolCount.add(new HashMap<>());
         }
+    }
+
+    public boolean isCellTopLeftDiagonal(int row, int column) {
+        return row == column;
+    }
+
+    public boolean isCellBottomLeftDiagonal (int row, int column) {
+        return (row+column) == dimension-1;
+    }
+
+    public boolean isCornerCell(int row, int column) {
+        if(row == 0 || row == dimension-1) {
+            return (column == 0 || column == dimension-1);
+        }
+        return false;
     }
 
     @Override
