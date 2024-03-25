@@ -41,6 +41,14 @@ public class OrderOneWinningStrategy implements WinningStrategy {
 
     @Override
     public Player checkWinner(Board board, Move lastMove) {
+        char symbol = lastMove.getPlayer().getSymbol().getSymbolChar();
+        int row = lastMove.getCell().getRow();
+        int column = lastMove.getCell().getColumn();
+        int dimension = board.getSize();
+
+        if(!rowSymbolCount.get(row).containsKey(symbol)) {
+            rowSymbolCount.get(row).put(symbol, 0);
+        }
         return null;
     }
 }
