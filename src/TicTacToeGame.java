@@ -1,8 +1,5 @@
 import controller.GameController;
-import models.Game;
-import models.Player;
-import models.PlayerType;
-import models.Symbol;
+import models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +42,22 @@ public class TicTacToeGame {
 
             players.add(new Player(new Symbol(characterSymbol.charAt(0)), playerName, PlayerType.HUMAN));
         }
+
         Game game = gameController.createGame(dimension, players);
+
+        while(game.getGameState().equals(GameState.IN_PROGRESS)) {
+            System.out.println("Current board status");
+            gameController.displayBoard(game);
+
+
+            gameController.executeMove(game);
         }
+
+        System.out.println("Game has ended, result was : ");
+        if(gameController.getGameState(game).equals(GameState.DRAW)) {
+            System.out.println("Game is won by : " + gameController.getWinner(game));
+        } else {
+            System.out.println("GAME was a Draw");
+        }
+    }
 }

@@ -18,11 +18,12 @@ public class Player {
         this.scanner = new Scanner(System.in);
     }
     public Move makeMove(Board board) {
-        System.out.println("Please enter the row for them");
+        System.out.println("Please enter the row for the move");
         int row = scanner.nextInt();
-        System.out.println("Please enter the row for them");
+        System.out.println("Please enter the column for the move");
         int column = scanner.nextInt();
         //TODO : validate the move and throw exception or msg
+        board.getBoard().get(row).get(column).setPlayer(this);
         return new Move(new Cell(row, column, this), this);
     }
 

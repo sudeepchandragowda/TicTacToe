@@ -1,6 +1,8 @@
 package controller;
 
 import models.Game;
+import models.GameState;
+import models.Move;
 import models.Player;
 import strategies.winningStrategy.OrderOneWinningStrategy;
 import strategies.winningStrategy.WinningStrategy;
@@ -20,17 +22,27 @@ public class GameController {
         }
         return null;
     }
+
     public void displayBoard (Game game) {
         game.getBoard().printBoard();
     }
+
     public GameState getGameState(Game game){
         return game.getGameState();
     }
+
     public void executeMove(Game game) {
         int nextPlayerIndex = game.getNextplayerIndex();
         Player nextPlayerToPlay = game.getPlayers().get(nextPlayerIndex);
-        nextPlayerToPlay.makeMove(game.getBoard());
+        Move move = nextPlayerToPlay.makeMove(game.getBoard());
+        updateGameMoves(game, move);
     }
+
+    private void updateGameMoves(Game game, Move move) {
+        game.getMoves().add(move);
+    }
+
+
     public String getWinner(Game game) {
         return game.getWinner().getName();
     }
