@@ -2,17 +2,18 @@ package controller;
 
 import models.Game;
 import models.Player;
+import strategies.winningStrategy.OrderOneWinningStrategy;
 import strategies.winningStrategy.WinningStrategy;
 
 import java.util.List;
 
 public class GameController {
-    public Game createGame(int dimension, List<Player> players, List<WinningStrategy> winningStrategies) {
+    public Game createGame(int dimension, List<Player> players) {
         try {
             return Game.builder()
                     .setDimension(dimension)
                     .setPlayers(players)
-                    .setWinningStrategies(winningStrategies)
+                    .setWinningStrategies(List.of(new OrderOneWinningStrategy(dimension)))
                     .build();
         } catch (Exception e) {
             System.out.println("Could not start the game, something went wrong");

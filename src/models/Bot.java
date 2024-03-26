@@ -13,7 +13,7 @@ public class Bot extends Player{
     }
 
     public Move makeMove(Board board) {
-        Move move = botPlayingStrategy.makeMove(board);
+        Move move = botPlayingStrategy.makeMove(this, board);
         move.setPlayer(this);
         return move;
     }
