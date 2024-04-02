@@ -1,9 +1,9 @@
 import controller.GameController;
 import models.*;
+import strategies.botPlayingStrategy.BotPlayingStrategy;
+import strategies.botPlayingStrategy.BotPlayingStrategyFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TicTacToeGame {
     public static void main(String[] args) {
@@ -35,13 +35,20 @@ public class TicTacToeGame {
 
         if(isBotPresent.equals("Y")){
             System.out.println("What is the name of the BOT?");
-            String playerName = sc.next();
+            String botName = sc.next();
 
             System.out.println("What is the character symbol of the BOT?");
             String characterSymbol = sc.next();
 
-            players.add(new Player(new Symbol(characterSymbol.charAt(0)), playerName, PlayerType.HUMAN));
+            Bot bot = new Bot(new Symbol(characterSymbol.charAt(0)),
+                    botName,
+                    BotDifficultyLevel.EASY,
+                    BotPlayingStrategyFactory.getBotPlayingStrategyForDifficultyLevel(BotDifficultyLevel.EASY));
+
+            players.add(bot);
         }
+        // For randomizing the players in the list
+        Collections.shuffle(players);
 
         Game game = gameController.createGame(dimension, players);
 
