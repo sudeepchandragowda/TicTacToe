@@ -1,5 +1,6 @@
 package strategies.winningStrategy;
 
+import exception.GameDrawnException;
 import models.Board;
 import models.Move;
 import models.Player;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class OrderOneWinningStrategy implements WinningStrategy {
     private int dimension;
+    private int symbolsAdded;
     private List<HashMap<Character, Integer>> rowSymbolCount = new ArrayList<>();
     private List<HashMap<Character, Integer>> columnSymbolCount = new ArrayList<>();
     private HashMap<Character, Integer> topLeftDiagonalSymbolCount = new HashMap<>();
@@ -41,6 +43,7 @@ public class OrderOneWinningStrategy implements WinningStrategy {
 
     @Override
     public Player checkWinner(Board board, Move lastMove) {
+        symbolsAdded++;
         char symbol = lastMove.getPlayer().getSymbol().getSymbolChar();
         int row = lastMove.getCell().getRow();
         int column = lastMove.getCell().getColumn();
@@ -54,8 +57,12 @@ public class OrderOneWinningStrategy implements WinningStrategy {
             return lastMove.getPlayer();
         else if((checkForCornerWin(row, column, symbol, lastMove) != null))
             return lastMove.getPlayer();
-        else
-            return null;
+
+        if(symbolsAdded == (dimension*dimension)) {
+            board.printBoard();
+            throw new GameDrawnException("Game is drawn as cells are full");
+        }
+        return null;
     }
         private Player checkForRowWins ( int row, int column, char symbol, Move lastMove){
             if (!rowSymbolCount.get(row).containsKey(symbol)) {
