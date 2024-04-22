@@ -40,9 +40,11 @@ public class TicTacToeGame {
             System.out.println("What is the character symbol of the BOT?");
             String characterSymbol = sc.next();
 
+            //TODO : take user input for bot difficulty level and create the object accordingly
+            BotDifficultyLevel difficultyLevel = BotDifficultyLevel.EASY;
             Bot bot = new Bot(new Symbol(characterSymbol.charAt(0)),
                     botName,
-                    BotDifficultyLevel.EASY,
+                    difficultyLevel,
                     BotPlayingStrategyFactory.getBotPlayingStrategyForDifficultyLevel(BotDifficultyLevel.EASY));
 
             players.add(bot);
@@ -68,3 +70,8 @@ public class TicTacToeGame {
         }
     }
 }
+
+
+// 4 players -> 0 1 2 3 0 1 2 3 0 1 2 3
+// playerIndex++ -> playerIndex % (n-1)
+// 4 -> 0 % 4 -> 0, 1%4 -> 1, 2%4 -> 2, 3%4 -> 3, 4%4 -> 0 5%4 ->1 6%4->2
