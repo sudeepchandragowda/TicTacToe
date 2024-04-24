@@ -53,20 +53,20 @@ public class TicTacToeGame {
         Collections.shuffle(players);
 
         Game game = gameController.createGame(dimension, players);
-
-        while(game.getGameState().equals(GameState.IN_PROGRESS)) {
+        int playerIndex = 0;
+        //TODO : optimise the while loop and handle exception gracefully
+        while(game.getGameState().equals(GameState.IN_PROGRESS)){
             System.out.println("Current board status");
             gameController.displayBoard(game);
-
-
-            gameController.executeMove(game);
-        }
-
-        System.out.println("Game has ended, result was : ");
-        if(gameController.getGameState(game).equals(GameState.DRAW)) {
-            System.out.println("Game is won by : " + gameController.getWinner(game));
-        } else {
-            System.out.println("GAME was a Draw");
+            playerIndex++;
+            playerIndex = playerIndex % players.size();
+            Move movePlayed = gameController.executeMove(game, players.get(playerIndex));
+            Player winner = gameController.checkWinner(game, movePlayed);
+            if(winner != null){
+                gameController.displayBoard(game);
+                System.out.println("Winner is : " + winner.getName());
+                break;
+            }
         }
     }
 }
