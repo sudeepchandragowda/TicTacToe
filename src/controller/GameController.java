@@ -48,3 +48,6 @@ public class GameController {
     }
 }
 
+
+// The client code should not call the entities but should call the controller through which entities are called.
+
