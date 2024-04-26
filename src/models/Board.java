@@ -7,7 +7,6 @@ public class Board {
     private int size;
     private List<List<Cell>> board;
 
-
     public Board(int size) {
         this.size = size;
         this.board = new ArrayList<>();
@@ -32,6 +31,7 @@ public class Board {
     public int getSize() {
         return size;
     }
+
 
     public void setSize(int size) {
         this.size = size;

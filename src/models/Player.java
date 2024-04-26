@@ -17,14 +17,28 @@ public class Player {
         this.playerType = playerType;
         this.scanner = new Scanner(System.in);
     }
+
     public Move makeMove(Board board) {
-        System.out.println("Please enter the row for the move");
+        System.out.println(this.getName() + ",Please enter the row for the move");
         int row = scanner.nextInt();
-        System.out.println("Please enter the column for the move");
+        System.out.println(this.getName() + ",Please enter the column for the move");
         int column = scanner.nextInt();
+
         //TODO : validate the move and throw exception or msg
+
+
+
         board.getBoard().get(row).get(column).setPlayer(this);
+        board.getBoard().get(row).get(column).setCellState(CellState.FILLED);
         return new Move(new Cell(row, column, this), this);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Symbol getSymbol() {

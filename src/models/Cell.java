@@ -18,6 +18,7 @@ public class Cell {
         this.player = player;
         this.cellState = CellState.FILLED;
     }
+
     public void display() {
         if(player == null) {
             System.out.print("| |");

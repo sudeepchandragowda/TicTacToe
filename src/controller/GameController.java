@@ -6,6 +6,7 @@ import models.Move;
 import models.Player;
 import strategies.winningStrategy.OrderOneWinningStrategy;
 import strategies.winningStrategy.WinningStrategy;
+import strategies.winningStrategy.WinningStrategyFactory;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class GameController {
             return Game.builder()
                     .setDimension(dimension)
                     .setPlayers(players)
-                    .setWinningStrategies(List.of(new OrderOneWinningStrategy(dimension)))
+                    .setWinningStrategies(List.of(WinningStrategyFactory.getWinningStrategy(dimension)))
                     .build();
         } catch (Exception e) {
             System.out.println("Could not start the game, something went wrong");
@@ -49,7 +50,6 @@ public class GameController {
         }
         return null;
     }
-
 
     public String getWinner(Game game) {
         return game.getWinner().getName();

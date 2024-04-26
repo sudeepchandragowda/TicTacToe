@@ -19,6 +19,7 @@ public class OrderOneWinningStrategy implements WinningStrategy {
     private HashMap<Character, Integer> cornerSymbolCount = new HashMap<>();
 
     public OrderOneWinningStrategy(int dimension) {
+        this.symbolsAdded = 0;
         this.dimension = dimension;
         for (int i = 0; i < dimension; i++) {
             rowSymbolCount.add(new HashMap<>());
@@ -44,10 +45,10 @@ public class OrderOneWinningStrategy implements WinningStrategy {
     @Override
     public Player checkWinner(Board board, Move lastMove) {
         symbolsAdded++;
+        Player lastMovePlayer = lastMove.getPlayer();
         char symbol = lastMove.getPlayer().getSymbol().getSymbolChar();
         int row = lastMove.getCell().getRow();
         int column = lastMove.getCell().getColumn();
-        int dimension = board.getSize();
 
         if(checkForRowWins(row, column, symbol, lastMove) != null)
             return lastMove.getPlayer();
@@ -81,13 +82,15 @@ public class OrderOneWinningStrategy implements WinningStrategy {
                 columnSymbolCount.get(column).put(symbol, 0);
             }
             columnSymbolCount.get(column).put(
-                    symbol, columnSymbolCount.get(column).get(symbol) + 1
+                    symbol,
+                    columnSymbolCount.get(column).get(symbol) + 1
             );
             //winning by same symbol across the column
             if (columnSymbolCount.get(column).get(symbol) == dimension)
                 return lastMove.getPlayer();
             return null;
     }
+
     private Player checkForDiagonalWins ( int row, int column, char symbol, Move lastMove){
             if (isCellTopLeftDiagonal(row, column)) {
                 if (!topLeftDiagonalSymbolCount.containsKey(symbol)) {

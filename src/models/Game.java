@@ -6,7 +6,6 @@ import exception.InvalidDimensionException;
 import exception.InvalidNumberOfPlayersException;
 import strategies.winningStrategy.WinningStrategy;
 
-import javax.swing.text.StyledEditorKit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +16,6 @@ public class Game {
     private List<Move> moves;
     private Player winner;
     private GameState gameState;
-    private int nextplayerIndex;
     private List<WinningStrategy> winningStrategies;
 
     private Game(List<Player> players, Board board, List<WinningStrategy> winningStrategies) {
@@ -25,7 +23,6 @@ public class Game {
         this.board = board;
         this.moves = new ArrayList<Move>();
         this.gameState = GameState.IN_PROGRESS;
-        this.nextplayerIndex = 0;
         this.winningStrategies = winningStrategies;
     }
 
@@ -47,10 +44,6 @@ public class Game {
 
     public GameState getGameState() {
         return gameState;
-    }
-
-    public int getNextplayerIndex() {
-        return nextplayerIndex;
     }
 
     public List<WinningStrategy> getWinningStrategies() {
@@ -76,21 +69,25 @@ public class Game {
             this.players = players;
             return this;
         }
+
         public Builder setWinningStrategies(List<WinningStrategy> winningStrategies) {
             this.winningStrategies = winningStrategies;
             return this;
         }
+
         public Builder setDimension(int dimension) {
             this.dimension = dimension;
             return this;
         }
-        public void addPlayer(Player player) {
 
+        public void addPlayer(Player player) {
             players.add(player);
         }
+
         public void addWinningStrategy(WinningStrategy winningStrategy) {
             winningStrategies.add(winningStrategy);
         }
+
         private void validateBotCounts() {
             int botCount = 0;
             for (Player player : players) {
@@ -105,7 +102,7 @@ public class Game {
 
         private void validateDimension() {
             if (dimension < 3 || dimension > 10) {
-                throw new InvalidDimensionException("Dimension should be 3 or more and less than 10");
+                throw new InvalidDimensionException("Dimension should be 3 or more and less than 11");
             }
         }
 
@@ -120,16 +117,19 @@ public class Game {
             for (Player player : players) {
                 set.add(player.getSymbol().getSymbolChar());
             }
+
             if (set.size() != players.size()) {
                 throw new DuplicateSymbolException("Every player should have unique symbol");
             }
         }
-        private void validate(){
+
+        private void validate() {
             validateBotCounts();
             validateDimension();
             validateNumberOfPlayers();
             validateUniqueSymbolForAllPlayers();
         }
+
         public Game build() {
             validate();
             return new Game(players, new Board(dimension), winningStrategies);
